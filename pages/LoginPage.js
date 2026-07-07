@@ -1,4 +1,6 @@
 import { expect } from '@playwright/test';
+import { BASE_URL, PRODUCTS_PAGE_TITLE } from '../utils/constants';
+
 
 export class LoginPage {
 
@@ -12,7 +14,10 @@ export class LoginPage {
     }
 
     async navigate() {
-        await this.page.goto('https://www.saucedemo.com/');
+
+        // await this.page.goto('https://www.saucedemo.com/');
+        await this.page.goto(BASE_URL);
+
     }
 
     async login(username, password) {
@@ -22,6 +27,8 @@ export class LoginPage {
     }
 
     async verifyLoginSuccessful() {
-        await expect(this.productsTitle).toHaveText('Products');
+
+       // await expect(this.productsTitle).toHaveText('Products');
+       await expect(this.productsTitle).toHaveText(PRODUCTS_PAGE_TITLE);
     }
 }

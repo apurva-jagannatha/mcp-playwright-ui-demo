@@ -1,4 +1,7 @@
 import { expect } from '@playwright/test';
+import { CART_PAGE_TITLE } from '../utils/constants';
+
+
 
 export class CartPage {
 
@@ -17,7 +20,9 @@ export class CartPage {
     }
 
     async verifyCartPage() {
-        await expect(this.cartTitle).toHaveText('Your Cart');
+        //await expect(this.cartTitle).toHaveText('Your Cart');
+        await expect(this.cartTitle).toHaveText(CART_PAGE_TITLE);
+        
     }
 
     async verifyProducts() {

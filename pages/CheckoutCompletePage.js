@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test';
+import { SUCCESS_MESSAGE } from '../utils/constants';
 
 export class CheckoutCompletePage {
 
@@ -20,8 +21,9 @@ export class CheckoutCompletePage {
 
     async verifyOrderCompleted() {
 
+        //await expect(this.successMessage).toHaveText('Thank you for your order!');
         await expect(this.successMessage)
-            .toHaveText('Thank you for your order!');
+        .toHaveText(SUCCESS_MESSAGE);
 
     }
 
