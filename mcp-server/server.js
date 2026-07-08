@@ -6,6 +6,8 @@ import { registerHelloTool } from "./tools/helloTool.js";
 import { registerListTestsTool } from "./tools/listTestsTool.js";
 import { registerRunTestTool } from "./tools/runTestTool.js";
 import { registerAnalyzeFailureTool } from "./tools/analyzeFailureTool.js";
+import { registerRunAllTestsTool } from "./tools/runAllTestsTool.js";
+import { registerRunTestsByTagTool } from "./tools/runTestsByTagTool.js";
 
 // Create the MCP server
 const server = new McpServer({
@@ -17,6 +19,9 @@ registerHelloTool(server);
 registerListTestsTool(server);
 registerRunTestTool(server);
 registerAnalyzeFailureTool(server);
+registerRunAllTestsTool(server);
+registerRunTestsByTagTool(server);
+
 
 
 // Register tool to list Playwright tests

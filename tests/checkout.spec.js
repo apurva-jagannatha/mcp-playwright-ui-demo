@@ -7,7 +7,7 @@ import { CheckoutCompletePage } from '../pages/CheckoutCompletePage';
 
 import user from '../test-data/user.json';
 
-test('Add products to cart', async ({ page }) => {
+test('@regression Add products to cart', async ({ page }) => {
 
     const loginPage = new LoginPage(page);
     const inventoryPage = new InventoryPage(page);

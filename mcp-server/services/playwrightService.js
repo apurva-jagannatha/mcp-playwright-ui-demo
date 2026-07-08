@@ -13,3 +13,23 @@ export async function runPlaywrightTest(testFile) {
     });
 
 }
+
+export async function runAllPlaywrightTests() {
+
+    const command = "npx playwright test";
+
+    return await execAsync(command, {
+        cwd: PLAYWRIGHT_PROJECT_PATH
+    });
+
+}
+
+export async function runPlaywrightTestsByTag(tag) {
+
+    const command = `npx playwright test --grep="${tag}"`;
+
+    return await execAsync(command, {
+        cwd: PLAYWRIGHT_PROJECT_PATH
+    });
+
+}
