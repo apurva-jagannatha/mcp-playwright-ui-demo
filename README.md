@@ -1,127 +1,256 @@
-# Playwright UI Automation Framework with Claude MCP
+# 🚀 Playwright QA MCP Server
 
-A professional end-to-end UI automation framework built using Playwright, JavaScript, and the Page Object Model (POM). This project demonstrates modern UI automation practices and is being extended with Claude Desktop MCP integration for AI-assisted test generation and execution.
+An AI-powered Playwright Automation Framework integrated with the Model Context Protocol (MCP), enabling Claude Desktop to discover, execute, and analyze Playwright tests using natural language.
 
----
+## 🎥 Project Demo
 
-## Tech Stack
+Watch the framework in action:
 
-- Playwright
-- JavaScript (ES6)
-- Node.js
-- Page Object Model (POM)
-- Git & GitHub
-- Claude Desktop (MCP) *(In Progress)*
-- GitHub Actions *(Coming Soon)*
+▶️ Demo Video
 
----
+https://youtu.be/Evw6y4B2UGY
 
-## Application Under Test
+## 📌 Overview
 
-https://www.saucedemo.com
+This project demonstrates how Artificial Intelligence can enhance Software Test Automation by integrating Playwright with a custom MCP Server.
 
----
+Instead of executing Playwright commands manually, users can interact with Claude Desktop using natural language to:
 
-## Project Structure
+* Discover available Playwright tests
+* Execute individual Playwright tests
+* Execute the complete test suite
+* Execute tests by tag (e.g. `@smoke`, `@regression`)
+* Analyze Playwright test failures
 
-```
-playwright-mcp-demo/
-│
-├── docs/
-│   └── TestPlan.md
-│
-├── pages/
-│   ├── LoginPage.js
-│   ├── InventoryPage.js
-│   ├── CartPage.js
-│   ├── CheckoutPage.js
-│   └── CheckoutCompletePage.js
-│
-├── tests/
-│   ├── login.spec.js
-│   └── checkout.spec.js
-│
-├── test-data/
-│   └── user.json
-│
-├── utils/
-│   └── constants.js
-│
-├── playwright.config.js
-├── package.json
-└── README.md
-```
+The project follows a clean, modular architecture using a Service Layer and Tool Layer, making it scalable and maintainable.
 
 ---
 
-## Features
+# ✨ Features
 
-- Page Object Model (POM)
-- Reusable page classes
-- External test data
-- End-to-End UI automation
-- Clean folder structure
-- HTML Test Reports
-- Easy to maintain
+## AI-Powered Test Discovery
 
----
+Ask Claude:
 
-## Test Scenario
+> List my Playwright tests
 
-1. Login with valid credentials
-2. Verify Products page
-3. Add products to cart
-4. Verify cart
-5. Checkout
-6. Complete purchase
-7. Verify success message
-8. Logout
+Claude returns all available Playwright test files.
 
 ---
 
-## Running the Project
+## Run Individual Playwright Tests
 
-Install dependencies
+Example:
+
+> Run checkout.spec.js
+
+The MCP Server executes:
 
 ```bash
-npm install
+npx playwright test tests/checkout.spec.js
 ```
 
-Run all tests
+---
+
+## Run Complete Test Suite
+
+Example:
+
+> Run all Playwright tests
+
+The MCP Server executes:
 
 ```bash
 npx playwright test
 ```
 
-Run login test
+---
+
+## Run Tests by Tag
+
+Supports Playwright tags such as:
+
+* @smoke
+* @regression
+
+Example:
+
+> Run smoke tests
+
+The MCP Server executes:
 
 ```bash
-npx playwright test tests/login.spec.js
-```
-
-Open HTML Report
-
-```bash
-npx playwright show-report
+npx playwright test --grep="@smoke"
 ```
 
 ---
 
-## Future Enhancements
+## Analyze Test Failures
 
-- Claude Desktop MCP integration
-- GitHub Actions CI/CD
-- Cross-browser testing
-- Parallel execution
-- API validation
-- Docker support
+Reads Playwright failure reports and summarizes failures for quick troubleshooting.
 
 ---
 
-## Author
+# 🏗 Project Architecture
+
+```
+                           Claude Desktop
+                                  │
+                                  │
+                                  ▼
+                   Playwright QA MCP Server
+                                  │
+          ┌───────────────────────┴──────────────────────┐
+          │                                              │
+          ▼                                              ▼
+      Tools Layer                                  Services Layer
+          │                                              │
+          ├── helloTool.js                              ├── playwrightService.js
+          ├── listTestsTool.js                          ├── reportService.js
+          ├── runTestTool.js                            └── fileService.js
+          ├── runAllTestsTool.js
+          ├── runTestsByTagTool.js
+          └── analyzeFailureTool.js
+                                  │
+                                  ▼
+                    Playwright Automation Framework
+                                  │
+                                  ▼
+                          Browser Execution
+```
+---
+
+# 📂 Project Structure
+
+```
+mcp-server/
+│
+├── server.js
+├── config.js
+│
+├── tools/
+│   ├── helloTool.js
+│   ├── listTestsTool.js
+│   ├── runTestTool.js
+│   ├── runAllTestsTool.js
+│   ├── runTestsByTagTool.js
+│   └── analyzeFailureTool.js
+│
+└── services/
+    ├── playwrightService.js
+    └── reportService.js
+```
+
+---
+
+# 🛠 Technologies Used
+
+* Playwright
+* Node.js
+* JavaScript (ES Modules)
+* Model Context Protocol (MCP)
+* Claude Desktop
+* Zod
+* Git
+* GitHub
+
+---
+
+# 💡 Design Principles
+
+* Modular Architecture
+* Single Responsibility Principle (SRP)
+* Separation of Concerns
+* Reusable Service Layer
+* Reusable MCP Tools
+* Clean Project Structure
+
+---
+
+# 🚀 Getting Started
+
+## Clone Repository
+
+```bash
+git clone https://github.com/apurva-jagannatha/mcp-playwright-ui-demo.git
+```
+
+## Install Dependencies
+
+```bash
+npm install
+```
+
+## Install Playwright
+
+```bash
+npx playwright install
+```
+
+## Start MCP Server
+
+```bash
+node mcp-server/server.js
+```
+
+Configure Claude Desktop to point to the MCP server and start interacting with your Playwright project using natural language.
+
+---
+
+# 📋 Example Prompts
+
+* List my Playwright tests
+* Run checkout.spec.js
+* Run all Playwright tests
+* Run Playwright tests with tag @smoke
+* Analyze Playwright failures
+---
+🧩 Tools Layer
+
+Instead of embedding all logic inside server.js, each capability is implemented as an independent MCP Tool.
+
+Each tool exposes one responsibility to Claude Desktop.
+
+| Tool                  | Responsibility                           |
+| --------------------- | ---------------------------------------- |
+| helloTool.js          | Verifies the MCP Server is running       |
+| listTestsTool.js      | Lists available Playwright test files    |
+| runTestTool.js        | Executes an individual Playwright test   |
+| runAllTestsTool.js    | Executes the complete Playwright suite   |
+| runTestsByTagTool.js  | Executes tests using Playwright tags     |
+| analyzeFailureTool.js | Reads and summarizes Playwright failures |
+
+#Benefits
+Single Responsibility Principle
+Easy to extend
+Easy to test
+Cleaner server.js
+Better maintainability
+
+
+---
+
+# 🔮 Future Enhancements
+
+* AI-generated Playwright tests from user stories
+* AI-generated Page Object Models
+* HTML report summarization
+* Automatic Jira bug report generation
+* Flaky test analysis
+* Test data generation using AI
+* CI/CD integration with GitHub Actions
+
+---
+
+# 👨‍💻 Author
 
 **Apurva Jagannatha**
 
-QA Automation Engineer
+QA Automation Engineer | API Testing | Playwright | MCP | AI for Test Automation
 
-GitHub: https://github.com/apurva-jagannatha
+GitHub:
+https://github.com/apurva-jagannatha
+
+LinkedIn:
+https://www.linkedin.com/in/apurva-j-b2820018/
+
